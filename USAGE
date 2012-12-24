@@ -1,0 +1,40 @@
+###########################SETUP###################################
+###################################################################
+
+	 _____________		450 ohm
+P0.0----|	      |---------|/\/\/|---------
+     	| NAND-Driver |				|-------TV-Composite-Input
+P1.0----|_____________|---------|/\/\/|---------
+				1k ohm
+
+###########################NAND_DRIVER#############################
+###################################################################
+
+           ______           ______
+P0.0------|      |---------|      |
+          | NAND |         | NAND |------- more reliable P0.0
+5V--------|______|     ----|______|
+		       |
+		       |
+		     5V|
+		       |
+           ______      |    ______
+P1.0------|      |     ----|      |
+          | NAND |         | NAND |------- more reliable P1.0
+5V--------|______|---------|______|
+
+
+###########################ASM and C-Files#########################
+###################################################################
+
+* 	To insert a new image in the framebuffer just draw a 80x80px 2color bitmap in your drawing program of choice e.g. GIMP
+	save it as Retrogfx.bitmap in the pattern_generator directory.
+	Then just compile the c-file again with "gcc -o bitmapgen -std=c99 bitmapgen.c" and pipe the ouput in a tempoary-file via
+	"./bitmapgen > tempfile" then exchange the framebuffer part in the vblank_computer.asm with your just generated one in the
+	tempfile and assemble it again finally reprogram your 8051
+
+*	Normal Computation is possible inside the MainLoop but for more functionality you may add a RegisterBank Switch, DPTR and
+	ACC-POP to be able to use all 8 and 16-bit Registers as usual.
+
+*	Please get in touch with the Stack-Manipulation at first because you have to adjust the last RETI for every command you add
+	befor it. Or just make it dynamic as well ;)

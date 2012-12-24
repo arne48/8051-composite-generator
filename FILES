@@ -1,0 +1,18 @@
+###########################PROGRAM_FILES###########################
+###################################################################
+./signalgen.asm -> just a signalgenerator which displays a framebuffer image without offering computation time
+./signalgen.hex -> assembled signalgenerator
+./vblank_computer.asm -> a signalgenerator with the opportunity to compute during the v-blanking periode (use the MAIN_LOOP for computation)
+./vblank_computer.hex -> assembled vblank_computer
+
+###########################HELPING_TOOLS###########################
+###################################################################
+./pattern_generators/bitmapgen.c -> source file of the bitmap-generator
+./pattern_generators/bitmapgen -> compiled bitmap-generator
+./pattern_generators/Retrogfx.bitmap -> test-bitmap
+./pattern_generators/examples/patterngen.c -> source file of chess-field-pattern generator
+./pattern_generators/examples/patterngen2.c -> source file of blackline-whiteline-pattern generator
+
+###########################PROJECT_FILE############################
+###################################################################
+./project.mcu8051ide -> project-file for the MCU 8051 IDE
