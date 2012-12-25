@@ -4,10 +4,9 @@ LJMP	ENTRY
 LJMP 	STOP_COMPUTING
 .ORG 	0x0100
 MAIN_LOOP:	
-MOV	DPTR, #0xA000	
-MOVX	A, @DPTR
-RL	A
-MOVX	@DPTR, A
+;;;;;;;;;;;;;;;;;;;;;;;
+;;; PLACE CODE HERE ;;;
+;;;;;;;;;;;;;;;;;;;;;;;
 SJMP	MAIN_LOOP
 
 ENTRY:
@@ -16,18 +15,6 @@ MOV 	R4,#242;LINE-COUNTER & LOOP-COUNTER
 MOV 	DPTR, #FRAMEBUFF;POSITION OF THE FRAMEBUFFER IN FLASH
 MOV 	B,#0;OFFSET FOR FRAMEBUFFER
 ;;;;/CONTROL-REGISTER;;;;;;
-
-;;;DEMO;;;;;;
-MOV	A,#20
-LCALL	DELAY
-MOV	DPTR, #0xA003	
-MOV	A, #0x82
-MOVX	@DPTR, A	;init 82C55 (port A output,port B input)
-MOV	DPTR, #0xA000
-MOV	A, #0x1
-MOVX	@DPTR, A
-;;;;/DEMO;;;;;
-
 
 ;;;;INITS;;;;;
 CLR	P0.0
@@ -79,16 +66,16 @@ MOV	31H,@R0
 ;;;Loading Stack for FAKE-RETI to reEnable TimerInterrupt;;;
 DEC	SP
 MOV	R0,SP
-MOV 	@R0, #0x7C	;TRASHING THE STACK
-INC	SP
-MOV	R0,SP
-MOV 	@R0, #0x01	;TRASHING THE STACK
-;;;/Loading Stack for FAKE-RETI to reEnable TimerInterrupt;;;
-;;;Doing FAKE-RETI;;;
-RETI			;TRASHING THE STACK
-;;;/Doing FAKE-RETI;;;
-;;;Writing back the Main-Loop Position to the Stack;;;
-INC	SP
+MOV 	@R0, #0x65	;;;;!!!!!!!!!!!!!!!!!!!! AJUST THIS VALUE SO YOU WILL JUMP FROM
+INC	SP								;|
+MOV	R0,SP								;|
+MOV 	@R0, #0x01	;TRASHING THE STACK				;|
+;;;/Loading Stack for FAKE-RETI to reEnable TimerInterrupt;;;		;|
+;;;Doing FAKE-RETI;;;							;|
+RETI			;TRASHING THE STACK			!!!!!!!!!!!!!!!!!HERE TO
+;;;/Doing FAKE-RETI;;;							;|
+;;;Writing back the Main-Loop Position to the Stack;;;			;|
+INC	SP							;!!!!!!!!!!!!!!!!HERE
 MOV	R0,SP
 MOV 	@R0, 30H	;TRASHING THE STACK
 INC	SP

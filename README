@@ -1,6 +1,17 @@
+This progam was a project of mine in which i had to show that it is possible to generatate a
+stable composite signal with a 8051 @ 48Mhz.
+
+Requirements:
+* To make this run, you will need a 8051 with a 48Mhz quarz.
+* Further you need at least a 4kb XCODE Module for storing the framebuffer in.
+* How to setup a cheap output driver out of NAND gates is described in the USAGE-file
+
+
+File-Contents:
 You find the purposes of the files in the FILES-file
 You find a explanation how to Setup the Hardware and change the Framebuffer in the USAGE-file
 Informations about the Licence can be found in the COPYRIGHT-file
+
 
 Feel free to contact me if you have any questions.
 My contact details can be found in the AUTHORS-file
